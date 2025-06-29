@@ -1,0 +1,114 @@
+{
+  "info": {
+    "name": "Brev.ly API",
+    "description": "API para o encurtador de URLs Brev.ly",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3333",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Verifica se o servidor está funcionando"
+      },
+      "response": []
+    },
+    {
+      "name": "Database Test",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/db-test",
+          "host": ["{{baseUrl}}"],
+          "path": ["db-test"]
+        },
+        "description": "Testa a conexão com o banco de dados PostgreSQL"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Shortened Link",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"originalUrl\": \"https://www.google.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/links",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "links"]
+        },
+        "description": "Cria um novo link encurtado"
+      },
+      "response": []
+    },
+    {
+      "name": "Redirect to Original URL",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/links/{{shortCode}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "links", "{{shortCode}}"]
+        },
+        "description": "Redireciona para a URL original (deve retornar 302)"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Link Statistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/links/{{shortCode}}/stats",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "links", "{{shortCode}}", "stats"]
+        },
+        "description": "Obtém estatísticas de um link específico"
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Links",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/links",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "links"]
+        },
+        "description": "Lista todos os links (para fins administrativos)"
+      },
+      "response": []
+    }
+  ]
+} 
