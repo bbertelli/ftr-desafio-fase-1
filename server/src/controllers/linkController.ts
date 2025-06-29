@@ -13,6 +13,12 @@ interface GetLinkRequest {
   };
 }
 
+interface DeleteLinkRequest {
+  Params: {
+    id: string;
+  };
+}
+
 export class LinkController {
   /**
    * Create a new shortened link
@@ -53,6 +59,52 @@ export class LinkController {
       return reply.status(500).send({
         error: 'Internal server error',
         message: 'Failed to create shortened link'
+      });
+    }
+  }
+
+  /**
+   * Delete a link by ID
+   * DELETE /api/links/:id
+   */
+  static async deleteLink(request: FastifyRequest<DeleteLinkRequest>, reply: FastifyReply) {
+    try {
+      const { id } = request.params;
+
+      // Check if link exists
+      const existingLink = await LinkService.getLinkById(id);
+
+      if (!existingLink) {
+        return reply.status(404).send({
+          error: 'Link not found',
+          message: 'The requested link does not exist'
+        });
+      }
+
+      // Delete the link
+      const deleted = await LinkService.deleteLink(id);
+
+      if (!deleted) {
+        return reply.status(500).send({
+          error: 'Internal server error',
+          message: 'Failed to delete link'
+        });
+      }
+
+      return reply.status(200).send({
+        success: true,
+        message: 'Link deleted successfully',
+        data: {
+          id: existingLink.id,
+          shortCode: existingLink.shortCode,
+          originalUrl: existingLink.originalUrl
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting link:', error);
+      return reply.status(500).send({
+        error: 'Internal server error',
+        message: 'Failed to delete link'
       });
     }
   }

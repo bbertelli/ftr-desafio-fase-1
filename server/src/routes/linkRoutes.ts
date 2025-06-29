@@ -43,6 +43,47 @@ export async function linkRoutes(fastify: FastifyInstance) {
     }
   };
 
+  // Schema for deleting a link
+  const deleteLinkSchema = {
+    schema: {
+      params: {
+        type: 'object',
+        required: ['id'],
+        properties: {
+          id: {
+            type: 'string',
+            format: 'uuid',
+            description: 'The ID of the link to delete'
+          }
+        }
+      },
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            success: { type: 'boolean' },
+            message: { type: 'string' },
+            data: {
+              type: 'object',
+              properties: {
+                id: { type: 'string' },
+                shortCode: { type: 'string' },
+                originalUrl: { type: 'string' }
+              }
+            }
+          }
+        },
+        404: {
+          type: 'object',
+          properties: {
+            error: { type: 'string' },
+            message: { type: 'string' }
+          }
+        }
+      }
+    }
+  };
+
   // Schema for getting link stats
   const getLinkStatsSchema = {
     schema: {
@@ -106,6 +147,9 @@ export async function linkRoutes(fastify: FastifyInstance) {
 
   // POST /api/links - Create a new shortened link
   fastify.post('/api/links', createLinkSchema, LinkController.createLink);
+
+  // DELETE /api/links/:id - Delete a link by ID
+  fastify.delete('/api/links/:id', deleteLinkSchema, LinkController.deleteLink);
 
   // GET /api/links/:shortCode - Redirect to original URL
   fastify.get('/api/links/:shortCode', redirectSchema, LinkController.redirectToOriginal);

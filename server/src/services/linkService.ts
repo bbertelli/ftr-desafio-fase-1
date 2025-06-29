@@ -59,6 +59,40 @@ export class LinkService {
   }
 
   /**
+   * Get link by ID
+   */
+  static async getLinkById(id: string): Promise<{
+    id: string;
+    originalUrl: string;
+    shortCode: string;
+    accessCount: number;
+    createdAt: Date;
+    updatedAt: Date;
+  } | null> {
+    const [link] = await db
+      .select()
+      .from(links)
+      .where(eq(links.id, id));
+
+    return link || null;
+  }
+
+  /**
+   * Delete link by ID
+   */
+  static async deleteLink(id: string): Promise<boolean> {
+    const [deletedLink] = await db
+      .delete(links)
+      .where(eq(links.id, id))
+      .returning({
+        id: links.id,
+        shortCode: links.shortCode,
+      });
+
+    return !!deletedLink;
+  }
+
+  /**
    * Increment access count for a link
    */
   static async incrementAccessCount(shortCode: string): Promise<void> {
