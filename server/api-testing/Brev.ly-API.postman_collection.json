@@ -83,6 +83,20 @@
       "response": []
     },
     {
+      "name": "Export Links to CSV",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/links/export",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "links", "export"]
+        },
+        "description": "Exporta todos os links para CSV e faz upload para CDN"
+      },
+      "response": []
+    },
+    {
       "name": "Redirect to Original URL",
       "request": {
         "method": "GET",

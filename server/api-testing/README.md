@@ -23,6 +23,7 @@ Esta pasta contém todos os arquivos necessários para testar a API do Brev.ly.
 - ✅ Database Test - `/db-test`
 - ✅ Create Link - `POST /api/links`
 - ✅ Delete Link - `DELETE /api/links/:id`
+- ✅ Export CSV - `GET /api/links/export`
 - ✅ Redirect - `GET /api/links/:shortCode`
 - ✅ Get Stats - `GET /api/links/:shortCode/stats`
 - ✅ Get All Links - `GET /api/links`
@@ -32,6 +33,7 @@ Esta pasta contém todos os arquivos necessários para testar a API do Brev.ly.
 - Servidor rodando em `http://localhost:3333`
 - PostgreSQL configurado e conectado
 - Migrations executadas
+- Cloudflare R2 configurado (para exportação CSV)
 
 ## 🔄 Fluxo de Teste Completo
 
@@ -43,8 +45,9 @@ Esta pasta contém todos os arquivos necessários para testar a API do Brev.ly.
 6. **Get Stats** - Verificar estatísticas do link criado
 7. **Redirect Test** - Testar redirecionamento (deve retornar 302)
 8. **Get All Links** - Listar todos os links criados
-9. **Delete Link** - Deletar o link criado
-10. **Verify Deletion** - Confirmar que o link foi deletado
+9. **Export CSV** - Exportar links para CSV e fazer upload para CDN
+10. **Delete Link** - Deletar o link criado
+11. **Verify Deletion** - Confirmar que o link foi deletado
 
 ---
 

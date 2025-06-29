@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { LinkService } from '../services/linkService';
+import { ExportService } from '../services/exportService';
 
 interface CreateLinkRequest {
   Body: {
@@ -105,6 +106,32 @@ export class LinkController {
       return reply.status(500).send({
         error: 'Internal server error',
         message: 'Failed to delete link'
+      });
+    }
+  }
+
+  /**
+   * Export all links to CSV
+   * GET /api/links/export
+   */
+  static async exportLinksToCSV(request: FastifyRequest, reply: FastifyReply) {
+    try {
+      const { url, fileName } = await ExportService.exportLinksToCSVAndUpload();
+
+      return reply.send({
+        success: true,
+        message: 'Links exported successfully to CSV',
+        data: {
+          downloadUrl: url,
+          fileName: fileName,
+          exportedAt: new Date().toISOString()
+        }
+      });
+    } catch (error) {
+      console.error('Error exporting links to CSV:', error);
+      return reply.status(500).send({
+        error: 'Internal server error',
+        message: 'Failed to export links to CSV'
       });
     }
   }

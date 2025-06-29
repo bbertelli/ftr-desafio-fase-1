@@ -13,15 +13,15 @@ Este projeto implementa uma API REST para gerenciar o encurtamento de URLs, util
 - [x] Deve ser possível criar um link
     - [x] Não deve ser possível criar um link com URL encurtada mal formatada
     - [x] Não deve ser possível criar um link com URL encurtada já existente
-- [ ] Deve ser possível deletar um link
+- [x] Deve ser possível deletar um link
 - [x] Deve ser possível obter a URL original por meio de uma URL encurtada
 - [x] Deve ser possível listar todas as URL's cadastradas
 - [x] Deve ser possível incrementar a quantidade de acessos de um link
-- [ ] Deve ser possível exportar os links criados em um CSV
-    - [ ] Deve ser possível acessar o CSV por meio de uma CDN (Amazon S3, Cloudflare R2, etc)
-    - [ ] Deve ser gerado um nome aleatório e único para o arquivo
-    - [ ] Deve ser possível realizar a listagem de forma performática
-    - [ ] O CSV deve ter campos como, URL original, URL encurtada, contagem de acessos e data de criação
+- [x] Deve ser possível exportar os links criados em um CSV
+    - [x] Deve ser possível acessar o CSV por meio de uma CDN (Amazon S3, Cloudflare R2, etc)
+    - [x] Deve ser gerado um nome aleatório e único para o arquivo
+    - [x] Deve ser possível realizar a listagem de forma performática
+    - [x] O CSV deve ter campos como, URL original, URL encurtada, contagem de acessos e data de criação
 
 ## 🛠️ Stack Tecnológica
 
@@ -35,7 +35,7 @@ Este projeto implementa uma API REST para gerenciar o encurtamento de URLs, util
 - [x] **@fastify/cors** - Middleware CORS
 - [x] **@fastify/helmet** - Segurança
 - [x] **dotenv** - Variáveis de ambiente
-- [ ] **zod** - Validação de dados (usando JSON Schema do Fastify)
+- [x] **JSON Schema** - Validação de dados (implementado no Fastify)
 
 ## 📁 Estrutura do Projeto
 
@@ -99,10 +99,10 @@ npm start
 ### Links
 - [x] `POST /api/links` - Criar novo link encurtado
 - [x] `GET /api/links` - Listar todos os links
-- [ ] `DELETE /api/links/:id` - Deletar link
+- [x] `DELETE /api/links/:id` - Deletar link
 - [x] `GET /api/links/:shortCode` - Redirecionar para URL original
 - [x] `GET /api/links/:shortCode/stats` - Obter estatísticas do link
-- [ ] `GET /api/links/export` - Exportar links em CSV
+- [x] `GET /api/links/export` - Exportar links em CSV
 
 ### Utilitários
 - [x] `GET /health` - Health check

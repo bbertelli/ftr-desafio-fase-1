@@ -84,6 +84,36 @@ export async function linkRoutes(fastify: FastifyInstance) {
     }
   };
 
+  // Schema for exporting links to CSV
+  const exportLinksSchema = {
+    schema: {
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            success: { type: 'boolean' },
+            message: { type: 'string' },
+            data: {
+              type: 'object',
+              properties: {
+                downloadUrl: { type: 'string' },
+                fileName: { type: 'string' },
+                exportedAt: { type: 'string', format: 'date-time' }
+              }
+            }
+          }
+        },
+        500: {
+          type: 'object',
+          properties: {
+            error: { type: 'string' },
+            message: { type: 'string' }
+          }
+        }
+      }
+    }
+  };
+
   // Schema for getting link stats
   const getLinkStatsSchema = {
     schema: {
@@ -150,6 +180,9 @@ export async function linkRoutes(fastify: FastifyInstance) {
 
   // DELETE /api/links/:id - Delete a link by ID
   fastify.delete('/api/links/:id', deleteLinkSchema, LinkController.deleteLink);
+
+  // GET /api/links/export - Export all links to CSV
+  fastify.get('/api/links/export', exportLinksSchema, LinkController.exportLinksToCSV);
 
   // GET /api/links/:shortCode - Redirect to original URL
   fastify.get('/api/links/:shortCode', redirectSchema, LinkController.redirectToOriginal);

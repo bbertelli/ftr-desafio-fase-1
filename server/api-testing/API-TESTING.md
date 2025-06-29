@@ -94,13 +94,30 @@ DELETE {{baseUrl}}/api/links/{{linkId}}
 }
 ```
 
-### 5. Redirect to Original URL
+### 5. Export Links to CSV
+```
+GET {{baseUrl}}/api/links/export
+```
+**Resposta esperada:**
+```json
+{
+  "success": true,
+  "message": "Links exported successfully to CSV",
+  "data": {
+    "downloadUrl": "https://your-cdn.com/links-abc123def456.csv",
+    "fileName": "links-abc123def456.csv",
+    "exportedAt": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### 6. Redirect to Original URL
 ```
 GET {{baseUrl}}/api/links/{{shortCode}}
 ```
 **Resposta esperada:** HTTP 302 (redirect)
 
-### 6. Get Link Statistics
+### 7. Get Link Statistics
 ```
 GET {{baseUrl}}/api/links/{{shortCode}}/stats
 ```
@@ -120,7 +137,7 @@ GET {{baseUrl}}/api/links/{{shortCode}}/stats
 }
 ```
 
-### 7. Get All Links
+### 8. Get All Links
 ```
 GET {{baseUrl}}/api/links
 ```
@@ -153,8 +170,9 @@ GET {{baseUrl}}/api/links
 7. **Get Stats** - Verificar estatísticas do link criado
 8. **Redirect Test** - Testar redirecionamento (deve retornar 302)
 9. **Get All Links** - Listar todos os links criados
-10. **Delete Link** - Deletar o link criado
-11. **Verify Deletion** - Tentar acessar o link deletado (deve retornar 404)
+10. **Export CSV** - Exportar links para CSV e fazer upload para CDN
+11. **Delete Link** - Deletar o link criado
+12. **Verify Deletion** - Tentar acessar o link deletado (deve retornar 404)
 
 ## ⚠️ Códigos de Status HTTP
 
@@ -182,4 +200,9 @@ GET {{baseUrl}}/api/links
 
 ### Erro ao deletar link
 - Verifique se o `linkId` está correto (deve ser um UUID válido)
-- Verifique se o link existe antes de tentar deletar 
+- Verifique se o link existe antes de tentar deletar
+
+### Erro na exportação CSV
+- Verifique se as credenciais do Cloudflare R2 estão configuradas no `.env`
+- Verifique se o bucket existe e está configurado corretamente
+- Verifique se as permissões de acesso estão corretas 
