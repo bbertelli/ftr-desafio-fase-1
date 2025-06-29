@@ -10,13 +10,13 @@ Este projeto implementa uma API REST para gerenciar o encurtamento de URLs, util
 
 ### ✅ Funcionalidades Obrigatórias
 
-- [ ] Deve ser possível criar um link
-    - [ ] Não deve ser possível criar um link com URL encurtada mal formatada
-    - [ ] Não deve ser possível criar um link com URL encurtada já existente
+- [x] Deve ser possível criar um link
+    - [x] Não deve ser possível criar um link com URL encurtada mal formatada
+    - [x] Não deve ser possível criar um link com URL encurtada já existente
 - [ ] Deve ser possível deletar um link
-- [ ] Deve ser possível obter a URL original por meio de uma URL encurtada
-- [ ] Deve ser possível listar todas as URL's cadastradas
-- [ ] Deve ser possível incrementar a quantidade de acessos de um link
+- [x] Deve ser possível obter a URL original por meio de uma URL encurtada
+- [x] Deve ser possível listar todas as URL's cadastradas
+- [x] Deve ser possível incrementar a quantidade de acessos de um link
 - [ ] Deve ser possível exportar os links criados em um CSV
     - [ ] Deve ser possível acessar o CSV por meio de uma CDN (Amazon S3, Cloudflare R2, etc)
     - [ ] Deve ser gerado um nome aleatório e único para o arquivo
@@ -26,32 +26,34 @@ Este projeto implementa uma API REST para gerenciar o encurtamento de URLs, util
 ## 🛠️ Stack Tecnológica
 
 ### Obrigatório
-- **TypeScript** - Linguagem de programação
-- **Fastify** - Framework web
-- **Drizzle** - ORM para banco de dados
-- **PostgreSQL** - Banco de dados
+- [x] **TypeScript** - Linguagem de programação
+- [x] **Fastify** - Framework web
+- [x] **Drizzle** - ORM para banco de dados
+- [x] **PostgreSQL** - Banco de dados
 
 ### Recomendado
-- **@fastify/cors** - Middleware CORS
-- **@fastify/helmet** - Segurança
-- **dotenv** - Variáveis de ambiente
-- **zod** - Validação de dados
+- [x] **@fastify/cors** - Middleware CORS
+- [x] **@fastify/helmet** - Segurança
+- [x] **dotenv** - Variáveis de ambiente
+- [ ] **zod** - Validação de dados (usando JSON Schema do Fastify)
 
 ## 📁 Estrutura do Projeto
 
 ```
 server/
 ├── src/
-│   ├── controllers/     # Controladores da aplicação
-│   ├── routes/         # Rotas da API
-│   ├── services/       # Lógica de negócio
-│   ├── models/         # Modelos do Drizzle
-│   ├── migrations/     # Migrações do banco
+│   ├── controllers/     # Controladores da aplicação ✅
+│   ├── routes/         # Rotas da API ✅
+│   ├── services/       # Lógica de negócio ✅
+│   ├── models/         # Modelos do Drizzle ✅
+│   ├── database/       # Conexão com banco ✅
+│   ├── migrations/     # Migrações do banco ✅
 │   ├── utils/          # Utilitários
-│   └── app.ts          # Configuração do Fastify
+│   └── app.ts          # Configuração do Fastify ✅
+├── api-testing/        # Arquivos de teste da API ✅
 ├── docker/
 │   └── Dockerfile      # Dockerfile da aplicação
-├── .env.example        # Exemplo de variáveis de ambiente
+├── .env.example        # Exemplo de variáveis de ambiente ✅
 ├── package.json
 └── README.md
 ```
@@ -95,17 +97,22 @@ npm start
 ## 📝 Endpoints da API
 
 ### Links
-- `POST /links` - Criar novo link encurtado
-- `GET /links` - Listar todos os links
-- `DELETE /links/:id` - Deletar link
-- `GET /:shortCode` - Redirecionar para URL original
-- `GET /links/export` - Exportar links em CSV
+- [x] `POST /api/links` - Criar novo link encurtado
+- [x] `GET /api/links` - Listar todos os links
+- [ ] `DELETE /api/links/:id` - Deletar link
+- [x] `GET /api/links/:shortCode` - Redirecionar para URL original
+- [x] `GET /api/links/:shortCode/stats` - Obter estatísticas do link
+- [ ] `GET /api/links/export` - Exportar links em CSV
+
+### Utilitários
+- [x] `GET /health` - Health check
+- [x] `GET /db-test` - Teste de conexão com banco
 
 ## 🗄️ Banco de Dados
 
 ### Tabelas
 
-#### links
+#### links ✅
 - `id` - UUID (Primary Key)
 - `original_url` - TEXT (URL original)
 - `short_code` - VARCHAR (Código encurtado único)
@@ -137,22 +144,28 @@ docker-compose up
 
 ## 🔒 Segurança
 
-- CORS habilitado
-- Validação de entrada com Zod
-- Sanitização de dados
-- Rate limiting (recomendado)
-- Helmet para headers de segurança
+- [x] CORS habilitado
+- [x] Validação de entrada com JSON Schema
+- [x] Sanitização de dados
+- [ ] Rate limiting (recomendado)
+- [x] Helmet para headers de segurança
 
 ## 📊 Performance
 
-- Índices no banco de dados para `short_code`
-- Paginação na listagem de links
-- Cache para URLs mais acessadas (recomendado)
-- Otimização de queries com Drizzle
+- [x] Índices no banco de dados para `short_code`
+- [ ] Paginação na listagem de links
+- [ ] Cache para URLs mais acessadas (recomendado)
+- [x] Otimização de queries com Drizzle
 
 ## 🧪 Testes
 
-### Estrutura de Testes
+### Arquivos de Teste ✅
+- [x] Coleção Postman/Insomnia completa
+- [x] Variáveis de ambiente configuradas
+- [x] Documentação de uso
+- [x] Todos os endpoints testados e funcionando
+
+### Estrutura de Testes (Futuro)
 ```
 tests/
 ├── unit/           # Testes unitários
@@ -169,10 +182,10 @@ npm run test:coverage
 
 ## 📈 Monitoramento
 
-- Logs estruturados
-- Métricas de performance
-- Health check endpoint
-- Error tracking
+- [x] Logs estruturados
+- [ ] Métricas de performance
+- [x] Health check endpoint
+- [ ] Error tracking
 
 ## 🚀 Deploy
 
@@ -183,18 +196,18 @@ npm run test:coverage
 - CDN para arquivos CSV
 
 ### Desenvolvimento
-- Hot reload
-- Logs detalhados
-- Banco local ou Docker
+- [x] Hot reload
+- [x] Logs detalhados
+- [x] Banco local ou Docker
 
 ## 💡 Dicas de Implementação
 
-1. **Consistência**: Mantenha padrão entre usar `id` ou `short_code` para operações
-2. **Validação**: Valide URLs antes de salvar
-3. **Unicidade**: Garanta que `short_code` seja único
-4. **Performance**: Use índices no banco de dados
-5. **Segurança**: Implemente rate limiting
-6. **Logs**: Registre acessos para estatísticas
+1. **Consistência**: ✅ Mantenha padrão entre usar `id` ou `short_code` para operações
+2. **Validação**: ✅ Valide URLs antes de salvar
+3. **Unicidade**: ✅ Garanta que `short_code` seja único
+4. **Performance**: ✅ Use índices no banco de dados
+5. **Segurança**: ⚠️ Implemente rate limiting
+6. **Logs**: ✅ Registre acessos para estatísticas
 
 ## 🔗 Links Úteis
 
