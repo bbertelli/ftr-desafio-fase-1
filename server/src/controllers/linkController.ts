@@ -44,7 +44,7 @@ export class LinkController {
           id: link.id,
           shortCode: link.shortCode,
           originalUrl: link.originalUrl,
-          shortUrl: `${request.protocol}://${request.hostname}/api/links/${link.shortCode}`
+          shortUrl: `${request.protocol}://${request.hostname}:${request.port || 3333}/api/links/${link.shortCode}`
         }
       });
     } catch (error) {
@@ -193,7 +193,7 @@ export class LinkController {
           accessCount: link.accessCount,
           createdAt: link.createdAt,
           updatedAt: link.updatedAt,
-          shortUrl: `${request.protocol}://${request.hostname}/api/links/${link.shortCode}`
+          shortUrl: `${request.protocol}://${request.hostname}:${request.port || 3333}/api/links/${link.shortCode}`
         }
       });
     } catch (error) {
@@ -222,7 +222,7 @@ export class LinkController {
           accessCount: link.accessCount,
           createdAt: link.createdAt,
           updatedAt: link.updatedAt,
-          shortUrl: `${request.protocol}://${request.hostname}/api/links/${link.shortCode}`
+          shortUrl: `${request.protocol}://${request.hostname}:${request.port || 3333}/api/links/${link.shortCode}`
         }))
       });
     } catch (error) {
