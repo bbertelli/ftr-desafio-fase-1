@@ -17,7 +17,7 @@ function App() {
     const loadLinks = async () => {
       try {
         const response = await apiService.getLinks()
-        setLinks(response.links || [])
+        setLinks(response || [])
       } catch (err) {
         console.error('Error loading links:', err instanceof Error ? err.message : 'Unknown error')
       } finally {
@@ -193,14 +193,14 @@ function App() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-1 text-gray-400 hover:text-gray-600"
-                            title="Abrir link"
+                            title="Abrir link encurtado"
                           >
                             <ExternalLink size={14} />
                           </a>
                         </div>
                         <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
                           <span>Criado em: {new Date(link.createdAt).toLocaleDateString('pt-BR')}</span>
-                          <span>Cliques: {link.clicks}</span>
+                          <span>Cliques: {link.accessCount || 0}</span>
                         </div>
                       </div>
                       <button

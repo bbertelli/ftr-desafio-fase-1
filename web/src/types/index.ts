@@ -4,7 +4,7 @@ export interface Link {
   shortCode: string;
   shortUrl: string;
   createdAt: string;
-  clicks: number;
+  accessCount: number;
 }
 
 export interface CreateLinkRequest {
@@ -17,7 +17,7 @@ export interface CreateLinkResponse {
   shortCode: string;
   shortUrl: string;
   createdAt: string;
-  clicks: number;
+  accessCount: number;
 }
 
 export interface ApiResponse<T> {
