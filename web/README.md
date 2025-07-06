@@ -1,251 +1,162 @@
 # Brev.ly - Frontend
 
-## 📋 Descrição
+Frontend da aplicação Brev.ly, um encurtador de URLs desenvolvido com React, TypeScript e Tailwind CSS.
 
-Frontend da aplicação **Brev.ly** - Encurtador de URL desenvolvido para o desafio da Faculdade de Tecnologia Rocketseat.
+## 🚀 Tecnologias
 
-Este projeto implementa uma aplicação React SPA que permite o gerenciamento de URLs encurtadas, utilizando TypeScript, Vite e seguindo fielmente o layout do Figma.
-
-## 🚀 Funcionalidades e Regras
-
-### ✅ Funcionalidades Obrigatórias
-
-- [ ] Deve ser possível criar um link
-    - [ ] Não deve ser possível criar um link com encurtamento mal formatado
-    - [ ] Não deve ser possível criar um link com encurtamento já existente
-- [ ] Deve ser possível deletar um link
-- [ ] Deve ser possível obter a URL original por meio do encurtamento
-- [ ] Deve ser possível listar todas as URL's cadastradas
-- [ ] Deve ser possível incrementar a quantidade de acessos de um link
-- [ ] Deve ser possível baixar um CSV com o relatório dos links criados
-
-### 🎨 Regras Específicas do Frontend
-
-- [ ] É obrigatória a criação de uma aplicação React no formato SPA utilizando o Vite como `bundler`
-- [ ] Siga o mais fielmente possível o layout do Figma
-- [ ] Trabalhe com elementos que tragam uma boa experiência ao usuário (`empty state`, ícones de carregamento, bloqueio de ações a depender do estado da aplicação)
-- [ ] Foco na responsividade: essa aplicação deve ter um bom uso tanto em desktops quanto em celulares
-
-## 📄 Páginas da Aplicação
-
-### 1. Página Raiz (`/`)
-- Formulário de cadastro de links
-- Listagem dos links cadastrados
-- Dashboard principal da aplicação
-
-### 2. Página de Redirecionamento (`/:url-encurtada`)
-- Busca o valor dinâmico da URL
-- Faz pesquisa na API por aquela URL encurtada
-- Redireciona para a URL original
-
-### 3. Página de Recurso Não Encontrado
-- Exibida para URLs que não seguem o padrão
-- Caso o usuário digite endereço errado
-- Caso a URL encurtada não exista
-
-## 🛠️ Stack Tecnológica
-
-### Obrigatório
-- **TypeScript** - Linguagem de programação
-- **React** - Biblioteca de interface
-- **Vite** - Bundler (sem framework)
-
-### Flexível (Recomendado)
-- **TailwindCSS** - Framework CSS
-- **React Query** - Gerenciamento de estado e cache
-- **React Hook Form** - Formulários
-- **Zod** - Validação de dados
-
-### Adicional
-- **React Router** - Roteamento
-- **Axios** - Cliente HTTP
+- **React 19** - Biblioteca para construção de interfaces
+- **TypeScript** - Tipagem estática
+- **Vite** - Build tool e dev server
+- **Tailwind CSS** - Framework CSS utilitário
 - **Lucide React** - Ícones
-- **React Hot Toast** - Notificações
+- **React Hook Form** - Gerenciamento de formulários
+- **React Query** - Gerenciamento de estado e cache
+- **Zod** - Validação de schemas
 
-## 📁 Estrutura do Projeto
+## 📦 Instalação
 
-```
-web/
-├── src/
-│   ├── components/     # Componentes reutilizáveis
-│   │   ├── ui/        # Componentes de UI base
-│   │   └── forms/     # Componentes de formulário
-│   ├── pages/         # Páginas da aplicação
-│   ├── hooks/         # Custom hooks
-│   ├── services/      # Serviços de API
-│   ├── utils/         # Utilitários
-│   ├── types/         # Tipos TypeScript
-│   ├── styles/        # Estilos globais
-│   ├── App.tsx        # Componente principal
-│   └── main.tsx       # Entry point
-├── public/            # Arquivos estáticos
-├── .env.example       # Exemplo de variáveis de ambiente
-├── package.json
-├── vite.config.ts     # Configuração do Vite
-├── tailwind.config.js # Configuração do Tailwind
-└── README.md
-```
-
-## 🔧 Configuração
-
-### Variáveis de Ambiente
-
-Crie um arquivo `.env` baseado no `.env.example`:
-
-```env
-VITE_FRONTEND_URL=http://localhost:5173
-VITE_BACKEND_URL=http://localhost:3333
-```
-
-### Scripts Disponíveis
-
+1. Instale as dependências:
 ```bash
-# Instalar dependências
 npm install
-
-# Executar em desenvolvimento
-npm run dev
-
-# Build para produção
-npm run build
-
-# Preview da build
-npm run preview
-
-# Lint
-npm run lint
-
-# Type check
-npm run type-check
 ```
+
+2. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env
+```
+
+3. Edite o arquivo `.env` com a URL da API:
+```env
+VITE_API_URL=http://localhost:3333
+```
+
+## 🏃‍♂️ Executando
+
+### Desenvolvimento
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em `http://localhost:5173`
+
+### Build de Produção
+```bash
+npm run build
+```
+
+### Preview do Build
+```bash
+npm run preview
+```
+
+## 🎨 Funcionalidades
+
+### ✅ Implementadas
+- [x] Interface responsiva e moderna
+- [x] Criação de links encurtados
+- [x] Listagem de links criados
+- [x] Exclusão de links
+- [x] Exportação para CSV
+- [x] Copiar link para área de transferência
+- [x] Abertura de links em nova aba
+- [x] Loading states e feedback visual
+- [x] Tratamento de erros
+- [x] Design responsivo (mobile-first)
+
+### 🎯 Características
+
+- **Interface Moderna**: Design limpo e intuitivo com gradientes e sombras
+- **Responsivo**: Funciona perfeitamente em desktop, tablet e mobile
+- **Feedback Visual**: Estados de loading, sucesso e erro bem definidos
+- **Acessibilidade**: Botões com títulos, contraste adequado
+- **UX Otimizada**: Formulários com validação, feedback imediato
+
+## 📱 Layout
+
+A aplicação segue um layout responsivo com:
+
+1. **Header**: Logo e descrição do serviço
+2. **Formulário**: Campo para inserir URL e botão de encurtamento
+3. **Mensagens**: Feedback de sucesso e erro
+4. **Lista de Links**: Cards com informações dos links criados
+5. **Ações**: Botões para copiar, abrir e deletar links
+
+## 🔧 Estrutura do Projeto
+
+```
+src/
+├── components/     # Componentes reutilizáveis
+├── hooks/         # Custom hooks
+├── pages/         # Páginas da aplicação
+├── services/      # Serviços de API
+├── types/         # Definições de tipos TypeScript
+├── utils/         # Utilitários
+├── App.tsx        # Componente principal
+└── main.tsx       # Ponto de entrada
+```
+
+## 🌐 Integração com Backend
+
+O frontend se comunica com o backend através das seguintes rotas:
+
+- `POST /api/links` - Criar link encurtado
+- `GET /api/links` - Listar todos os links
+- `DELETE /api/links/:id` - Deletar link
+- `GET /api/links/export` - Exportar links para CSV
 
 ## 🎨 Design System
 
-### Style Guide (Figma)
-- **Cores**: Paleta consistente definida no Figma
-- **Tipografia**: Fontes e hierarquias
-- **Componentes**: Botões, inputs, cards, etc.
-- **Espaçamentos**: Sistema de grid e margins
-- **Ícones**: Biblioteca de ícones consistente
+### Cores
+- **Primária**: Azul (#2563eb)
+- **Secundária**: Verde (#16a34a)
+- **Erro**: Vermelho (#dc2626)
+- **Sucesso**: Verde (#16a34a)
+- **Background**: Gradiente azul claro
 
-### Responsividade
-- **Mobile First**: Desenvolvimento focado em mobile
-- **Breakpoints**: Tablet e Desktop
-- **Flexibilidade**: Layout adaptativo
+### Componentes
+- **Botões**: Bordas arredondadas, hover effects
+- **Cards**: Sombras suaves, bordas arredondadas
+- **Inputs**: Focus rings, validação visual
+- **Ícones**: Lucide React para consistência
 
-## 📱 Experiência do Usuário (UX)
+## 📊 Performance
 
-### Estados da Interface
-- **Loading States**: Indicadores de carregamento
-- **Empty States**: Estados vazios informativos
-- **Error States**: Tratamento de erros
-- **Success States**: Confirmações de ações
+- **Bundle Size**: Otimizado com Vite
+- **Lazy Loading**: Componentes carregados sob demanda
+- **Caching**: React Query para cache de dados
+- **Code Splitting**: Automático com Vite
 
-### Interações
-- **Feedback Visual**: Animações e transições
-- **Validação em Tempo Real**: Formulários responsivos
-- **Acessibilidade**: ARIA labels e navegação por teclado
-- **Performance**: Carregamento otimizado
+## 🔒 Segurança
 
-## 🔗 Integração com API
-
-### Endpoints Utilizados
-- `POST /links` - Criar link
-- `GET /links` - Listar links
-- `DELETE /links/:id` - Deletar link
-- `GET /links/export` - Download CSV
-
-### Gerenciamento de Estado
-- **React Query**: Cache e sincronização
-- **Local State**: Estados de formulário
-- **Global State**: Configurações da aplicação
-
-## 🧪 Testes
-
-### Estrutura de Testes
-```
-tests/
-├── unit/           # Testes unitários
-├── integration/    # Testes de integração
-└── e2e/           # Testes end-to-end
-```
-
-### Comandos de Teste
-```bash
-npm run test
-npm run test:watch
-npm run test:coverage
-```
+- **CORS**: Configurado no backend
+- **Validação**: URLs validadas no frontend e backend
+- **Sanitização**: Dados sanitizados antes de enviar
 
 ## 🚀 Deploy
 
-### Produção
-- Build otimizado com Vite
-- Variáveis de ambiente configuradas
-- CDN para assets estáticos
-- SPA routing configurado
+A aplicação pode ser deployada em qualquer plataforma que suporte aplicações React:
 
-### Desenvolvimento
-- Hot reload
-- Dev tools habilitadas
-- Logs detalhados
-- Proxy para API
+- **Vercel**: Deploy automático
+- **Netlify**: Deploy automático
+- **GitHub Pages**: Deploy estático
+- **Docker**: Containerização
 
-## 💡 Dicas de Implementação
+## 📝 Scripts Disponíveis
 
-### 1. Comece pelo Style Guide
-- Prepare o tema, fontes e componentes base
-- Facilita o desenvolvimento das páginas
+- `npm run dev` - Servidor de desenvolvimento
+- `npm run build` - Build de produção
+- `npm run preview` - Preview do build
+- `npm run lint` - Linting do código
+- `npm run type-check` - Verificação de tipos
 
-### 2. Mobile First
-- Desenvolva primeiro para mobile
-- Aproveite ferramentas como Tailwind
+## 🤝 Contribuição
 
-### 3. Experiência do Desenvolvedor (DX)
-- Use bibliotecas que facilitem o desenvolvimento
-- Mantenha o código organizado e tipado
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
 
-### 4. Performance
-- Lazy loading de componentes
-- Otimização de imagens
-- Bundle splitting
+## 📄 Licença
 
-## 🚀 Desafios Extras (Opcional)
-
-### SPA → SSR
-- Migrar para Next.js ou Remix
-- Renderização no servidor
-
-### Metadados OpenGraph
-- Descrição do link
-- Imagem de preview
-- Metadados dinâmicos
-
-### Upload de Imagem
-- Upload para OpenGraph
-- Preview de imagens
-
-### Interface Otimista
-- Feedback imediato
-- Rollback em caso de erro
-
-## 🔗 Links Úteis
-
-- [Documentação React](https://react.dev/)
-- [Documentação Vite](https://vitejs.dev/)
-- [Documentação TypeScript](https://www.typescriptlang.org/docs/)
-- [Documentação Tailwind CSS](https://tailwindcss.com/docs)
-- [Documentação React Query](https://tanstack.com/query/latest)
-- [Figma do Projeto](https://www.figma.com/community/file/1477335071553579816/encurtador-de-links)
-
-## 📱 Screenshots
-
-### Desktop
-![Desktop View](screenshots/desktop.png)
-
-### Mobile
-![Mobile View](screenshots/mobile.png)
-
----
-
-**Desenvolvido com 💜 para o desafio da Faculdade de Tecnologia Rocketseat** 
+Este projeto está sob a licença MIT.
