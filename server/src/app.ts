@@ -8,7 +8,12 @@ import { linkRoutes } from './routes/linkRoutes';
 const app = Fastify();
 
 // Middlewares
-app.register(cors, { origin: true });
+app.register(cors, { 
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+});
 app.register(helmet);
 
 // Register routes

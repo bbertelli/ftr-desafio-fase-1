@@ -190,6 +190,9 @@ export async function linkRoutes(fastify: FastifyInstance) {
   // GET /api/links/:shortCode/stats - Get link statistics
   fastify.get('/api/links/:shortCode/stats', getLinkStatsSchema, LinkController.getLinkStats);
 
+  // GET /api/links/:shortCode/data - Get link by shortCode (API JSON)
+  fastify.get('/api/links/:shortCode/data', LinkController.getLinkByShortCode);
+
   // GET /api/links - Get all links (for admin purposes)
   fastify.get('/api/links', {
     schema: {
@@ -218,4 +221,7 @@ export async function linkRoutes(fastify: FastifyInstance) {
       }
     }
   }, LinkController.getAllLinks);
+
+  // Rota pública para redirecionamento
+  fastify.get('/r/:shortCode', LinkController.redirectToOriginal);
 } 

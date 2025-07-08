@@ -233,4 +233,38 @@ export class LinkController {
       });
     }
   }
+
+  /**
+   * Get link by shortCode (API JSON)
+   * GET /api/links/:shortCode/data
+   */
+  static async getLinkByShortCode(request: FastifyRequest<GetLinkRequest>, reply: FastifyReply) {
+    try {
+      const { shortCode } = request.params;
+      const link = await LinkService.getLinkByShortCode(shortCode);
+      if (!link) {
+        return reply.status(404).send({
+          success: false,
+          message: 'Link não encontrado'
+        });
+      }
+      return reply.send({
+        success: true,
+        data: {
+          id: link.id,
+          originalUrl: link.originalUrl,
+          shortCode: link.shortCode,
+          accessCount: link.accessCount,
+          createdAt: link.createdAt,
+          shortUrl: `${request.protocol}://${request.hostname}:${request.port || 3333}/r/${link.shortCode}`
+        }
+      });
+    } catch (error) {
+      console.error('Error getting link by shortCode:', error);
+      return reply.status(500).send({
+        success: false,
+        message: 'Erro ao buscar link'
+      });
+    }
+  }
 } 

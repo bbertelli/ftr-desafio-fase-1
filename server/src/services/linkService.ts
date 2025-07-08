@@ -45,12 +45,14 @@ export class LinkService {
   /**
    * Get link by short code
    */
-  static async getLinkByShortCode(shortCode: string): Promise<{ id: string; originalUrl: string; accessCount: number } | null> {
+  static async getLinkByShortCode(shortCode: string): Promise<{ id: string; originalUrl: string; shortCode: string; accessCount: number; createdAt: Date } | null> {
     const [link] = await db
       .select({
         id: links.id,
         originalUrl: links.originalUrl,
+        shortCode: links.shortCode,
         accessCount: links.accessCount,
+        createdAt: links.createdAt,
       })
       .from(links)
       .where(eq(links.shortCode, shortCode));
