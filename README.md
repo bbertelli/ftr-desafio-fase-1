@@ -28,9 +28,9 @@ O **Brev.ly** é uma aplicação FullStack de encurtador de URL desenvolvida com
 - [x] Integração completa com API do backend
 
 ### DevOps
-- [ ] Containerização com Docker
-- [ ] Deploy automatizado
-- [ ] CI/CD pipeline
+- [x] Containerização com Docker
+- [x] Deploy automatizado
+- [x] CI/CD pipeline
 
 ## 📁 Estrutura do Projeto
 
@@ -162,10 +162,43 @@ Este projeto foi desenvolvido como parte do desafio da faculdade, consolidando c
 - [x] Design moderno com Tailwind CSS
 - [x] Estados de loading e feedback visual
 
-### DevOps 📋 **PENDENTE**
-- [ ] Containerização com Docker
-- [ ] Deploy automatizado
-- [ ] CI/CD pipeline
+### DevOps 📋
+- [x] Containerização com Docker
+- [x] Deploy automatizado
+- [x] CI/CD pipeline
+
+## 🔗 Observações sobre o fluxo de redirecionamento
+- O link encurtado exibido ao usuário aponta para o frontend (`/r/:shortCode`)
+- O frontend exibe uma tela de redirecionamento estilizada e, após 2s, redireciona para o backend (`/r/:shortCode`)
+- O contador de acessos é incrementado apenas ao acessar a rota pública do backend 
+
+## 🚀 Deploy Automatizado (Vercel)
+
+### Frontend
+- O frontend pode ser deployado facilmente na Vercel.
+- Configure o projeto na Vercel apontando para a pasta `web`.
+- Defina a variável de ambiente `VITE_API_URL` com a URL do backend.
+- O deploy será feito automaticamente pelo workflow do GitHub Actions após cada push na branch main.
+
+### Backend
+- Para projetos Fastify tradicionais, recomenda-se deploy em Railway, Render, Fly.io, etc.
+- (Opcional) Para deploy Serverless na Vercel, é necessário adaptar o backend.
+
+### CI/CD (GitHub Actions)
+- O workflow `.github/workflows/ci.yml` faz build/lint do frontend e backend e deploya o frontend na Vercel.
+- Configure os secrets no repositório GitHub:
+  - `VERCEL_TOKEN`: Token de acesso da Vercel
+  - `VERCEL_ORG_ID`: ID da organização Vercel
+  - `VERCEL_PROJECT_ID`: ID do projeto Vercel (frontend) 
+
+## ✅ Status Final do Projeto
+- [x] Layout 100% fiel ao Figma (SPA, responsivo, UX moderna)
+- [x] Feedback visual (toast) em todas as ações principais
+- [x] Fluxo de redirecionamento SPA: link encurtado aponta para o frontend, que exibe tela de redirecionamento e depois redireciona para o backend
+- [x] Contador de acessos incrementado apenas via rota pública do backend
+- [x] Containerização com Docker concluída
+- [x] CI/CD com GitHub Actions (build, lint e deploy automático do frontend na Vercel)
+- [x] Instruções de deploy automatizado e integração frontend-backend atualizadas 
 
 ## 📄 Licença
 

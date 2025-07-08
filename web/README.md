@@ -59,10 +59,16 @@ npm run preview
 - [x] Exportação para CSV
 - [x] Copiar link para área de transferência
 - [x] Abertura de links com contagem de cliques
-- [x] Loading states e feedback visual
+- [x] Loading states e feedback visual (toast)
 - [x] Tratamento de erros
 - [x] Design responsivo (mobile-first)
 - [x] Validação de URLs em tempo real
+- [x] Tela de redirecionamento estilizada (SPA)
+
+### Observações
+- O link encurtado exibido ao usuário aponta para o frontend (`/r/:shortCode`)
+- O frontend exibe uma tela de redirecionamento estilizada e, após 2s, redireciona para o backend
+- O contador de acessos é incrementado apenas ao acessar a rota pública do backend
 
 ### 🎯 Características
 

@@ -85,7 +85,7 @@ npm install
 npm run dev
 
 # Executar migrations
-npm run db:migrate
+npm run db:migrate   # Executa as migrations do banco de dados (exatamente como solicitado)
 
 # Build para produção
 npm run build
@@ -101,8 +101,14 @@ npm start
 - [x] `GET /api/links` - Listar todos os links
 - [x] `DELETE /api/links/:id` - Deletar link
 - [x] `GET /api/links/:shortCode` - Redirecionar para URL original
+- [x] `GET /api/links/:shortCode/data` - Retornar dados do link (usado pelo frontend SPA)
+- [x] `GET /r/:shortCode` - Redirecionamento público (incrementa contador de acessos, usado pelo frontend)
 - [x] `GET /api/links/:shortCode/stats` - Obter estatísticas do link
 - [x] `GET /api/links/export` - Exportar links em CSV
+
+### Integração com Frontend SPA
+- O frontend consome `/api/links/:shortCode/data` para exibir a tela de redirecionamento estilizada.
+- O contador de acessos é incrementado apenas ao acessar `/r/:shortCode` (rota pública).
 
 ### Utilitários
 - [x] `GET /health` - Health check
@@ -128,6 +134,8 @@ O projeto inclui um `Dockerfile` otimizado seguindo as melhores práticas:
 - Usuário não-root
 - Otimização de camadas
 - Health check
+
+O Dockerfile está pronto para gerar a imagem da aplicação conforme o desafio.
 
 ### Comandos Docker
 
