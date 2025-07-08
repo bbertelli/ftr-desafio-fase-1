@@ -1,11 +1,13 @@
-import type { 
-  Link,
+import { 
+  Link, 
+  CreateLinkRequest, 
   CreateLinkResponse, 
   ApiResponse, 
+  LinksResponse, 
   ExportResponse 
 } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3333';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 class ApiService {
   private async request<T>(
@@ -21,8 +23,6 @@ class ApiService {
       },
       ...options,
     };
-
-
 
     try {
       const response = await fetch(url, config);
@@ -40,41 +40,29 @@ class ApiService {
   }
 
   async createLink(originalUrl: string): Promise<CreateLinkResponse> {
-    const response = await this.request<CreateLinkResponse>('/api/links', {
+    const response = await this.request<CreateLinkResponse>('/links', {
       method: 'POST',
       body: JSON.stringify({ originalUrl }),
     });
     return response.data!;
   }
 
-  async getLinks(): Promise<Link[]> {
-    const response = await this.request<Link[]>('/api/links');
+  async getLinks(): Promise<LinksResponse> {
+    const response = await this.request<LinksResponse>('/links');
     return response.data!;
   }
 
   async deleteLink(id: string): Promise<void> {
-    const url = `${API_BASE_URL}/api/links/${id}`;
-    
-    const response = await fetch(url, {
+    await this.request(`/links/${id}`, {
       method: 'DELETE',
     });
-    
-    if (!response.ok) {
-      const data = await response.json();
-      throw new Error(data.message || 'Erro ao deletar link');
-    }
   }
 
   async exportLinks(): Promise<ExportResponse> {
-    const response = await this.request<ExportResponse>('/api/links/export', {
-      method: 'GET',
+    const response = await this.request<ExportResponse>('/links/export', {
+      method: 'POST',
     });
     return response.data!;
-  }
-
-  async getLinkByCode(code: string): Promise<Link | null> {
-    const response = await this.request<Link>(`/api/links/${code}/data`);
-    return response.data || null;
   }
 }
 
